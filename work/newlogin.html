@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>登录界面</title>
+		<link rel="stylesheet" href="./css/login.css" />
+		<script src="javascript/cookieTool.js"></script>
+	</head>
+	<body>
+		<div id="bigBox">
+		    <h1>LOGIN</h1>
+		    <form id="myForm">
+		      <div class="inputBox">
+		        <div class="inputText input">
+		            <input type="text" name="adminName" placeholder="username" id="adminName" />
+		          <span id="name"></span>
+		        </div>
+		        <div class="inputText">
+		          <input type="password" name="password"  placeholder="password" />
+		          <span id="pass"></span>
+		        </div>
+		        <input type="button" value="LOGIN" class="inputButton"  onclick="login()"/>
+				<div id="remember-container">
+				  <input type="checkbox" id="checkbox-2-1" class="checkbox" checked="checked"/>
+				  <span id="remember">Remember me</span>
+				</div>
+		      </div>
+		    </form>
+		  </div>
+     </body>
+	 <script src="javascript/jQuery-1.12.4.js"></script>
+		<script >
+		function login(){
+			$.ajax({
+				url:'http://localhost:8080/login',
+				type:'get',
+				data: $("#myForm").serialize(),
+				success:function(msg){
+					if('ok'==msg){
+						alert('登录成功');
+						console.log($("#adminName").val());
+						setCookie('adminName',$("#adminName").val(),1);
+						location.href = "index.html";
+					}else{
+						alert("登录失败");
+					}
+					location.History();
+				}
+			})
+		}
+		</script>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>ECharts</title>
+    <!-- 引入刚刚下载的 ECharts 文件 -->
+    <script src="echarts.js"></script>
+  </head>
+  <body>
+    <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+    <div id="main" style="width: 600px;height:400px;"></div>
+    <script type="text/javascript">
+      // 基于准备好的dom，初始化echarts实例
+      var myChart = echarts.init(document.getElementById('main'));
+
+      // 指定图表的配置项和数据
+      var option = {
+		//线条颜色
+		color:['red'],
+		  //标题
+        title: {
+          text: 'ECharts 入门示例'
+        },
+		//图表的提示框  axis是坐标轴触发提示框，item是图形触发
+        tooltip: {
+			trigger:'item'
+		},
+		//图例组件
+        legend: {
+          data: ['销量']  //如果series name有值,则可以删掉
+        },
+		//网格配置  控制图表大小
+		grid: {
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			//是否表示刻度标签
+			containLabel: true
+		},
+		//工具箱组件 这个可以将图下载成图片
+		toolbox:{
+		  feature:{
+			  saveAsImage:{}
+		  }
+		},
+		//x轴的相关配置
+		xAxis: {
+		  type: 'category',
+		  //是否让线条(折线图)与坐标轴不相交
+		  //boundaryGap:false,
+          data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+        },
+        yAxis: {
+		  type: 'value'
+		},
+		//系列图表配置 它决定着选择哪种类型的图表
+        series: [
+          {
+            name: '销量',
+            type: 'bar',
+			//stack 会导致数据堆叠，多折线不会相交
+            data: [5, 20, 36, 10, 10, 20]
+          }
+        ]
+      };
+
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option);
+    </script>
+  </body>
+</html>

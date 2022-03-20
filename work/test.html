@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="javascript/jQuery-1.12.4.js"></script>
+		<script src="vue-2.6.12.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" href="bootstrap-3.4.1-dist/css/bootstrap.min.css">
+		<script src="bootstrap-3.4.1-dist/js/bootstrap.min.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="javascript/bootstrap-table.css">
+		<script src="javascript/bootstrap-table.js"></script>
+		<script src="javascript/cookieTool.js"></script>
+	</head>
+	<style>
+		.title{
+			padding: 10px 20px;
+		}
+		.time{
+			font-size: 16px;
+		}
+		.score{
+			color: red;
+			font-size: 22px;
+		}
+		.top{
+			display: flex;
+			justify-content: space-between;
+			padding: 10px 60px;
+		}
+		.submit{
+			margin: 20px auto;
+			padding: 10px 20px;
+			color: #FFFFFF;
+			border-radius: 20px;
+			background-color: skyblue;
+			width: 120px;
+			text-align: center;
+			cursor: pointer;
+			user-select: none;
+			border: none;
+		}
+		.again{
+			margin: 20px auto;
+			padding: 10px 20px;
+			color: red;
+			border-radius: 20px;
+			width: 120px;
+			text-align: center;
+			cursor: pointer;
+			user-select: none;
+			border: none;
+		}
+		
+	</style>
+
+
+	<body>
+		<div id="app" >
+			
+			<table class="table table-hover table-bordered">
+			  <h3 class="title">基础训练(除法保留两位小数)</h3>
+			  <div class="top">
+				  <div class="time">{{time}}</div>
+				  <div>您的成绩是:  <span v-if="isSubmit" class="score">{{score}}</span></div>
+			  </div>
+			  <thead>
+			    <tr>
+			      <th>题号</th>
+			      <th>题目</th>
+			      <th>结果</th>
+				  <th v-if="isSubmit">正确答案</th>
+				  <th v-if="isSubmit">评判</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr v-for="t in test">
+			      <td>{{t.id}}</td>
+			      <td>{{t.str}}</td>
+			      <td>
+				  <input type="text" v-model="t.res1" onkeyup="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')"/>
+				  </td>
+				  <td v-if="isSubmit">{{t.res}}</td>
+				  <td v-if="isSubmit">{{t.judge}}</td>
+			    </tr>
+			  </tbody>
+			</table>
+			
+			<div type="button" v-if="!isSubmit" class="submit" @click="submit()">提交</div>
+			<div type="button" v-if="isSubmit" class="again" @click="again()()">再来一次</div>
+			
+		</div>
+		<script src="math.js" type="text/javascript" charset="utf-8"></script>
+		<script src="vue-2.6.12.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: "#app",
+				data: {
+					isSubmit: false,
+					test: [
+					],
+					time: "00 : 00",
+					timer: null,
+					score: 0,
+				},
+				mounted(){
+						this.getTest();
+						this.startTime();
+				},
+				methods: {
+					//生成基础题目
+					getTest(){
+						for(let i = 0 ; i < 20; i ++){
+							const {str,res} = createRan();
+							this.test.push({
+								id: i + 1,
+								str,
+								res,
+								res1 : '',
+								judge: ''
+							})
+							
+						}
+					},
+					//提交答卷
+					submit(){
+						this.isSubmit = true;
+						for(let i = 0 ; i < 20; i ++){
+							// console.log(this,tex)
+							console.log(this.test[i].res,this.test[i].res1,'xx')
+							if(this.test[i].res1  === this.test[i].res+''){
+								this.test[i].judge = '√'
+								this.score=this.score+5;
+							}else{
+								this.test[i].judge = '×'
+							}
+							this.endTime();
+						}
+						add(this.score);
+					},
+					//开始计数
+					startTime(){
+						let m = 0;
+						let s = 0;
+						this.timer = setInterval(() => {
+							s++;
+							if(s >= 60){
+								m++;
+								s=0;
+							}
+							let mm = m > 9 ? m : "0" + m;
+							let ss = s > 9 ? s : "0" + s;
+							this.time = mm + ":" +ss;
+						},1000);
+					},
+					//结束计时
+					endTime(){
+						if(this.timer){
+							clearInterval(this.timer);
+						}
+					},
+					//再来一次
+					again(){
+						location.reload();
+						
+					}
+				}
+			});
+			function add(score){
+				let grade=score;
+				let name=getCookie('adminName');
+				// console.log(score+'-->'+name);
+				$.ajax({
+					url: 'http://localhost:8080/add',
+					type: 'get',
+					data: {
+						grade: grade,
+						adminName: name
+					},
+					success: function(msg) {
+						if('ok'==msg){
+							alert('提交成功');
+						}else{
+							alert("提交失败");
+						}
+					}
+				
+				})
+			}
+		</script>
+	</body>
+	
+</html>

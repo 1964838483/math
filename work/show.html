@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<script src="echarts.js"></script>
+	<script src="javascript/jQuery-1.12.4.js"></script>
+	<script src="javascript/cookieTool.js"></script>
+	<body onload="show()">
+		<div id="main" style="width: 100%;height:700px;"></div>
+		<script type="text/jscript">
+		var myChart = echarts.init(document.getElementById('main'));
+		var arr=[];
+		var brr=[];
+		var i=0;
+			function show(){
+				let name=getCookie('adminName');
+				// console.log(score+'-->'+name);
+				$.ajax({
+					url: 'http://localhost:8080/find',
+					type: 'get',
+					data: {
+						adminName: name
+					},
+					success: function(list) {
+						for (a of list) {
+							i++;
+							arr.push(a.grate);
+							brr.push("第"+i+"次");
+						}
+						
+						myChart.setOption({
+						  color:['skyblue'],
+						  tooltip: {
+						    trigger: 'axis',
+						  },
+						  
+						  toolbox: {
+						    feature: {
+						      magicType: { show: true, type: ['line', 'bar'] },
+						      restore: { show: true },
+						      saveAsImage: { show: true }
+						    }
+						  },
+						  legend: {
+						    data: ['成绩']
+						  },
+						  xAxis: [
+						    {
+						      type: 'category',
+						      data: brr,
+						      axisPointer: {
+						        type: 'shadow'
+						      }
+						    }
+						  ],
+						  yAxis: [
+						    {
+						      type: 'value',
+						      name: '成绩',
+						      min: 0,
+						      max: 100,
+						      interval: 10,
+						      axisLabel: {
+						        formatter: '{value} '
+						      }
+						    }
+						  ],
+						  series: [
+						    {
+						      name: '成绩',
+						      type: 'bar',
+						      tooltip: {
+						        valueFormatter: function (value) {
+						          return value ;
+						        }
+						      },
+						      data: arr,
+						    }
+						  ]
+						});
+					}
+				
+				})
+			}
+		</script>
+	</body>
+</html>

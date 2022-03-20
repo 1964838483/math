@@ -1,0 +1,98 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: url(../img/background1.png) -170px -200px no-repeat;
+}
+#bigBox{
+    margin: 0 auto;
+    margin-top: 200px;
+    padding: 20px 50px;
+    background-color: rgba(0,0,0,0.8);
+    width: 400px;
+    height: 300px;
+    border-radius: 10px;
+    text-align: center;}
+#bigBox h1{
+    color: white;
+}
+#bigBox .inputBox{
+    margin-top: 50px;
+}
+#bigBox .inputBox .input{
+    margin-top: 20px;
+}
+#bigBox .inputBox .inputText span {
+    height: 15px;
+    display: block;
+    margin-top: 10px;
+}
+#bigBox .inputBox .inputText input{
+    border: 0;
+    padding: 10px 10px;
+    border-bottom: 1px solid white;
+    background-color: #00000000;
+    color: white;
+}
+#bigBox .inputBox .inputButton{
+    cursor: pointer;
+    border:  0;
+    width: 160px;
+    height: 40px;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    background-image: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);
+}
+a{
+    text-decoration: none;
+    color: skyblue;
+    font-size: 14px;
+}
+a:hover{
+    color: #6A6AFF;
+}
+
+#remember-container{
+  position: relative;
+  margin: -5px 20px;
+}
+
+.checkbox {
+	position: relative;
+	left: -10px;
+  cursor: pointer;
+	-webkit-appearance: none;
+	padding: 5px;
+	border-radius: 4px;
+  background: rgba(3,3,3,.2);
+	display: inline-block;
+  width: 16px;
+  height: 15px;
+}
+
+.checkbox:checked:active {
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+.checkbox:checked {
+  background: rgba(3,3,3,.4);
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.5);
+	color: #fff;
+}
+
+.checkbox:checked:after {
+	content: '\2714';
+	font-size: 10px;
+	top: 0px;
+	left: 4px;
+	color: #fff;
+}
+
+#remember{
+  position: relative;
+  left: -5px;
+  font-size: 13px;
+  font-family: 'Hind', sans-serif;
+  color: rgba(255,255,255,.5);
+}
