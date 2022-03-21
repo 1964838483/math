@@ -19,10 +19,9 @@
     <link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css?v=4.1.0" rel="stylesheet">
-	<script src="javascript/cookieTool.js"></script>
 </head>
 
-<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+<body onload="grate()" class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
     <div id="wrapper">
         <!--左侧导航开始-->
         <nav class="navbar-default navbar-static-side" role="navigation">
@@ -45,7 +44,7 @@
                         </div>
                     </li>
                     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                        <span class="ng-scope">系统功能</span>
+                        <span class="ng-scope">开心的一天</span>
                     </li>
                     <li>
                         <a href="#">
@@ -82,7 +81,9 @@
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="row border-bottom">
                 <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-                    
+                    <div class="navbar-header">
+                        <h3 style="margin-top: 13px;" id="grate"></h3>
+                    </div>
                     <ul class="nav navbar-top-links navbar-right">
                         <li class="dropdown">
                             <a class="dropdown-toggle count-info" onclick="loginOut()" href="#">
@@ -105,11 +106,10 @@
     <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <script src="js/plugins/layer/layer.min.js"></script>
-
+	<script src="javascript/cookieTool.js"></script>
     <!-- 自定义js -->
     <script src="js/hAdmin.js?v=4.1.0"></script>
     <script type="text/javascript" src="js/index.js"></script>
-
 
     
 </body>

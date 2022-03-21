@@ -23,3 +23,17 @@ function loginOut(){
 	setCookie('adminName', name, -1);
 	location.href='newlogin.html';
 }
+
+function grate(){
+	$.ajax({
+		url: 'http://localhost:8080/findLast',
+		type: 'get',
+		data: {
+			adminName: getCookie('adminName')
+		},
+		success: function(grate) {
+			$("#grate").html(`上次的成绩是<font style="font-size: 20px;" color = "red">`+grate+`</font>分，希望每次都能考100分噢`);
+		}
+	
+	})
+}
