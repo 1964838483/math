@@ -33,4 +33,11 @@ public class GradeController {
         List<Math> list = mathService.selectAllById(adminName);
         return list;
     }
+
+    @RequestMapping("/findLast")
+    public int findLast(String adminName){
+        List<Math> list = mathService.selectAllById(adminName);
+        Math math = list.get(list.size() - 1);
+        return math.getGrate();
+    }
 }
